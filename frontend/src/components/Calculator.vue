@@ -105,7 +105,8 @@ input {
   box-sizing: border-box;
   max-width: 100%;
   overflow: hidden;
-  color: black;
+  background-color: white;
+  color: #333;
 }
 
 .buttons {
@@ -120,6 +121,7 @@ button {
   background-color: #f1f1f1;
   border: 1px solid #ccc;
   cursor: pointer;
+  color: #333;
 }
 
 button:hover {
