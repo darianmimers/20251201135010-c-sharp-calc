@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "4CJKttb8E8OdAf6KV1IVeIZGnl1TtXJMFdIZUKkH8SI=",
+  "Source": "CalculatorBackend",
+  "BasePath": "_content/CalculatorBackend",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
