@@ -1,126 +1,156 @@
-# JS Calculator Utility
+# Calculator - Vue.js + .NET Core
 
-A lightweight, web-based JavaScript calculator designed to perform basic arithmetic operations directly in your browser.
+A modern two-layer calculator application with a **Vue.js frontend** and **.NET Core backend**, communicating via HTTP REST API.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This utility provides a simple, clean interface for calculations and can be used as a standalone tool or embedded into other web projects. All logic is contained within standard HTML/JS files for easy deployment and customization.
-
 ## Table of Contents
 
-* [JS Calculator Utility](#js-calculator-utility)
-    * [Table of Contents](#table-of-contents)
-    * [Features](#features)
-    * [Prerequisites](#prerequisites)
-    * [Installation and Setup](#installation-and-setup)
-    * [Configuration](#configuration)
-    * [Usage](#usage)
-    * [Integrations](#integrations)
-        * [Embedding in Websites](#embedding-in-websites)
-    * [License](#license)
+* [Features](#features)
+* [Architecture](#architecture)
+* [Prerequisites](#prerequisites)
+* [Installation and Setup](#installation-and-setup)
+* [Usage](#usage)
+* [Project Structure](#project-structure)
+* [License](#license)
 
 ---
 
 ## Features
 
-*   **Zero Dependencies**: Runs entirely in the browser using standard HTML, CSS, and JavaScript.
-*   **Portable**: No build steps or server requirements; just open the file and run.
-*   **Lightweight**: Minimal file size ensures instant loading times.
-*   **Standard Operations**: Supports addition, subtraction, multiplication, and division.
-*   **Responsive UI**: Adapts to different screen sizes (desktop and mobile).
-*   **Keyboard Support**: Enter numbers and operations using your physical keyboard.
+* **Two-Layer Architecture**: Clean separation between frontend and backend
+* **Vue.js Frontend**: Modern reactive UI with Vue 3 and Vite
+* **REST API**: HTTP communication with JSON payloads
+* **.NET Core Backend**: Robust calculation engine with error handling
+* **CORS Enabled**: Secure cross-origin resource sharing
+* **Responsive UI**: Adapts to different screen sizes
+* **Dark Mode Compatible**: Visible in both light and dark browser themes
 
-[Back to Top](#table-of-contents)
+---
+
+## Architecture
+
+```
+┌─────────────────┐         HTTP POST          ┌─────────────────┐
+│   Vue.js        │ ────────────────────────▶  │  .NET Core      │
+│   Frontend      │                             │  Web API        │
+│   Port 5173     │ ◀────────────────────────  │  Port 5238      │
+└─────────────────┘      JSON Response         └─────────────────┘
+```
+
+---
 
 ## Prerequisites
 
-1.  **Web Browser**: Any modern web browser (Chrome, Firefox, Edge, Safari).
-2.  **Git (Optional)**: To clone the repository locally.
+1. **Node.js** (v16 or higher) and npm
+2. **.NET SDK** (v8.0 or higher)
+3. Modern web browser (Chrome, Firefox, Edge, Safari)
+
+---
 
 ## Installation and Setup
 
-**Step 1: Clone this Repository**
+### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/darianmimers/20251201135010-js-calc.git
-cd 20251201135010-js-calc
+git clone https://github.com/darianmimers/20251201135010-c-sharp-calc.git
+cd 20251201135010-c-sharp-calc
 ```
 
-**Step 2: Launch the Calculator**
+### Step 2: Start the Backend
 
-Since this is a client-side web application, no installation of libraries is required.
-
-1.  Navigate to the project folder.
-2.  Double-click `index.html` to open it in your default web browser.
-
-**Step 3: Organize Files (Optional)**
-
-If you are integrating this into a larger project, you can move the files to your assets directory. Ensure `index.html` maintains the correct relative path to any linked `.js` or `.css` files.
-
-```text
-project-root/
-├── assets/
-│   ├── js-calc/
-│   │   ├── index.html
-│   │   └── ... (other assets)
-└── ...
+```bash
+cd backend
+dotnet run
 ```
 
-[Back to Top](#table-of-contents)
+The backend will start on `http://localhost:5238`
 
-## Configuration
+### Step 3: Start the Frontend
 
-This project is designed to be "plug and play," but it is easily customizable by editing the source code directly.
+Open a new terminal window:
 
-*   **UI Styling**: Modify the `<style>` section in `index.html` (or separate `.css` file if applicable) to change colors, fonts, and button sizes.
-*   **Logic**: Edit the `<script>` section or `.js` file to add advanced mathematical functions (e.g., square root, percentage).
-
-**Example: Changing Button Colors**
-Find the CSS class related to buttons (e.g., `.btn`) and change the `background-color` property:
-```css
-.btn {
-    background-color: #007bff; /* Change to your preferred color */
-    color: white;
-}
+```bash
+cd frontend
+npm install
+npm run dev
 ```
 
-[Back to Top](#table-of-contents)
+The frontend will start on `http://localhost:5173`
+
+### Step 4: Open the Application
+
+Navigate to `http://localhost:5173` in your browser.
+
+---
 
 ## Usage
 
-Once `index.html` is open in your browser:
-
 | Action | Method | Description |
 | :--- | :--- | :--- |
-| **Enter Numbers** | Mouse Click / Keyboard | Click the number buttons or type 0-9. |
-| **Operations** | Click / Keys (+, -, *, /) | Select the desired arithmetic operation. |
-| **Calculate** | Click `=` / Key `Enter` | Computes and displays the result. |
-| **Clear** | Click `C` / Key `Esc` | Resets the calculator to zero. |
+| **Enter Numbers** | Click buttons | Click number buttons or operators |
+| **Operations** | Click (+, -, *, /) | Select arithmetic operation |
+| **Parentheses** | Click (, ) | Group expressions |
+| **Calculate** | Click `=` | Send to backend and display result |
+| **Clear** | Click `C` | Reset the calculator |
 
 **Example Workflow:**
-1.  Open `index.html`.
-2.  Click `1`, `0`, `+`, `5`.
-3.  Click `=`.
-4.  Result `15` is displayed on the screen.
+1. Click `(`, `3`, `*`, `4`, `)`, `+`, `5`
+2. Click `=`
+3. Result `17` is displayed
 
-[Back to Top](#table-of-contents)
+---
 
-## Integrations
+## Project Structure
 
-### Embedding in Websites
-
-You can easily integrate this calculator into an existing website using an `<iframe>`.
-
-```html
-<iframe src="path/to/20251201135010-js-calc/index.html" width="300" height="400" style="border:none;"></iframe>
+```
+20251201135010-c-sharp-calc/
+├── backend/                      # .NET Core Web API
+│   ├── Controllers/
+│   │   └── CalculatorController.cs
+│   ├── Program.cs
+│   ├── CalculatorBackend.csproj
+│   └── Properties/
+│       └── launchSettings.json
+├── frontend/                     # Vue.js Application
+│   ├── src/
+│   │   ├── components/
+│   │   │   └── Calculator.vue
+│   │   ├── App.vue
+│   │   └── main.js
+│   ├── package.json
+│   └── vite.config.js
+└── README.md
 ```
 
-This allows the calculator to function as a widget within your dashboard, educational tool, or utility page without conflicting with your site's existing styles or scripts.
+---
 
-[Back to Top](#table-of-contents)
+## API Endpoint
+
+### POST /api/calculator/calculate
+
+**Request:**
+```json
+{
+  "expression": "2 + 2"
+}
+```
+
+**Response:**
+```json
+{
+  "result": 4
+}
+```
+
+**Error Response:**
+```
+400 Bad Request
+"Error calculating expression: ..."
+```
+
+---
 
 ## License
 
 [MIT](https://opensource.org/licenses/MIT)
-
-[Back to Top](#table-of-contents)
